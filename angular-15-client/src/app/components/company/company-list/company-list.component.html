@@ -1,0 +1,25 @@
+<h1 class="display-6 pb-4 text-center fw-bold">Registered Companies</h1>
+<div class="d-flex justify-content-center">
+  <div class="w-75 row row-cols-1 row-cols-md-3 g-4" *ngIf="companies">
+    <div class="col" *ngFor="let c of companies">
+      <div class="card h-100 box-shadow border">
+        <!-- <img [src]="c.logo" class="card-img-top p-5" alt="..."> -->
+        <div class="card-body">
+
+          <h5 class="card-title">{{c.companyName}}</h5>
+          <div class="d-flex justify-content-between pb-2">
+            <small class="text-body-secondary"> Found on {{c.foundedOn}}</small>
+            <span class="badge text-bg-info">{{c.type}}</span>
+          </div>
+          <a [href]="c.website" class="pb-2">{{c.website}}</a>
+          <p class="card-text">{{c.companySize}} Employees</p>
+
+          <p class="card-text box-highlight" *ngIf="c.about">{{c.about}}</p>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-danger">View Jobs</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

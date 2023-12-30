@@ -1,0 +1,54 @@
+<h1 class="display-6 pb-4 text-center fw-bold">Add a new company</h1>
+<div class="d-flex justify-content-center">
+<form class="w-50 row g-3 border p-5 box-shadow br-10" [formGroup]="companyForm" (ngSubmit)="saveCompany()">
+  <div class="col-md-12">
+    <label for="companyName" class="form-label">Company Name</label>
+    <input type="text" class="form-control" name="companyName" formControlName="companyName">
+  </div>
+
+  <div class="col-md-6">
+    <label for="type" class="form-label">Type</label>
+    <select name="type" class="form-select" formControlName="type">
+      <option>Private</option>
+      <option>Public</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="founded" class="form-label">Founded on</label>
+    <input type="text" class="form-control" name="founded" formControlName="foundedOn">
+  </div>
+  <div class="col-md-6">
+    <label for="companySize" class="form-label">Company Size</label>
+    <input type="text" class="form-control" name="companySize" formControlName="companySize">
+  </div>
+  <div class="col-md-6">
+    <label for="website" class="form-label">Website</label>
+    <input type="text" class="form-control" name="website" formControlName="website">
+  </div>
+  <div class="col-md-6">
+    <label for="Headquarter" class="form-label">Headquarter</label>
+    <input type="text" class="form-control" name="headquarter" formControlName="headquarter">
+  </div>
+  <div class="col-md-6">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" formControlName="password">
+  </div>
+  <div class="col-12">
+    <label for="address" class="form-label">Registered Address</label>
+  <textarea name="address" class="form-control"  formControlName="address"></textarea>
+  </div>
+  <div class="col-12">
+    <label for="about" class="form-label">About</label>
+  <textarea name="about" class="form-control" formControlName="about"></textarea>
+  </div>
+
+  <div class="col-12 d-flex justify-content-center">
+    <button type="reset" class="btn btn-danger mx-3 fw-bold">Reset</button>
+    <button type="submit" class="btn btn-warning fw-bold" [disabled]="companyForm.invalid">Add Company</button>
+  </div>
+</form>
+
+
+
+</div>
+

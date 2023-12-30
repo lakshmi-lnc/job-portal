@@ -1,0 +1,14 @@
+.header-bar{
+  background-color: #1A237E;
+    color: white;
+    height: 72px;
+    border-bottom: 1px solid;
+}
+
+::ng-deep .nav-link{
+  color: inherit !important;
+}
+
+.font-white{
+color:white;
+}
