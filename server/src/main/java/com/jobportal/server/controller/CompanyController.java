@@ -1,12 +1,15 @@
 package com.jobportal.server.controller;
 
 import com.jobportal.server.entity.Company;
+import com.jobportal.server.entity.Job;
 import com.jobportal.server.service.CompanyService;
+import com.jobportal.server.service.JobService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,7 +18,7 @@ import java.util.List;
 public class CompanyController {
 
     private CompanyService companyService;
-
+    private JobService jobService;
     // build create Company REST API
     @PostMapping
     public ResponseEntity<Company> createCompany(@RequestBody Company company){
@@ -54,5 +57,22 @@ public class CompanyController {
     public ResponseEntity<String> deleteCompany(@PathVariable("id") Long companyId){
         companyService.deleteCompany(companyId);
         return new ResponseEntity<>("Company successfully deleted!", HttpStatus.OK);
+    }
+
+    @PostMapping("{id}/job")
+    public ResponseEntity<Job> postAJob(@PathVariable("id") Long companyId, @RequestBody Job job){
+        Company company = companyService.getCompanyById(companyId);
+        //List<Job> jobs = new ArrayList<Job>();
+        job.setCompany(company);
+        //jobs.add(job);
+        Job j = jobService.createJob(job);
+      //  Company savedCompany = companyService.createCompany(company);
+        return new ResponseEntity<>(j, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/job/all")
+    public ResponseEntity<List<Job>> getAllJobs(){
+        List<Job> jobs = jobService.getAllJobs();
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 }

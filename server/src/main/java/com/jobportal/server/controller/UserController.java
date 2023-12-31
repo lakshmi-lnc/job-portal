@@ -1,6 +1,7 @@
 package com.jobportal.server.controller;
 
 import com.jobportal.server.entity.User;
+import com.jobportal.server.service.JobService;
 import com.jobportal.server.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
+    private JobService jobService;
 
     // build create User REST API
     @PostMapping

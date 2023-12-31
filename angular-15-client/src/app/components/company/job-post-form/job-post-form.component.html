@@ -1,56 +1,56 @@
 <h1 class="display-6 pb-4 text-center">New Job Post</h1>
 <div class="d-flex justify-content-center">
-<form class="w-50 row g-3 border p-5 box-shadow br-10">
+<form class="w-50 row g-3 border p-5 box-shadow br-10"  [formGroup]="jobForm" (ngSubmit)="postJob()">
   <div class="col-md-8">
     <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title">
+    <input type="text" class="form-control" name="title" formControlName="title">
   </div>
   <div class="col-md-4">
     <label for="experience" class="form-label">Experience</label>
-    <input type="number" class="form-control" id="experience">
+    <input type="number" class="form-control" name="experience" formControlName="experience">
   </div>
   <div class="col-md-6">
     <label for="location" class="form-label">Location</label>
-    <input type="text" class="form-control" id="location">
+    <input type="text" class="form-control" name="location" formControlName="location">
   </div>
   <div class="col-md-6">
     <label for="department" class="form-label">Department</label>
-    <input type="text" class="form-control" id="department">
+    <input type="text" class="form-control" name="department" formControlName="department">
   </div>
   <div class="col-md-6">
     <label for="salary" class="form-label">Salary range</label>
-    <input type="text" class="form-control" id="salary">
+    <input type="text" class="form-control" name="salary" formControlName="salaryRange">
   </div>
   <div class="col-md-6">
     <label for="employeeType" class="form-label">Employment type</label>
-    <select id="employeeType" class="form-select">
+    <select name="employeeType" class="form-select" formControlName="employmentType">
       <option>Permananet</option>
       <option>Contract</option>
     </select>
   </div>
   <div class="col-md-12">
     <label for="skill" class="form-label">Skills</label>
-    <input type="text" class="form-control" id="skill">
+    <input type="text" class="form-control" name="skill" formControlName="skills">
   </div>
   <div class="col-md-6">
     <label for="education" class="form-label">Education</label>
-    <input type="text" class="form-control" id="education">
+    <input type="text" class="form-control" name="education" formControlName="education">
   </div>
   <div class="col-md-6">
     <label for="hrName" class="form-label">HR Name</label>
-    <input type="text" class="form-control" id="hrName">
+    <input type="text" class="form-control" name="hrName" formControlName="hrName">
   </div>
   <div class="col-md-12">
     <label for="hrEmail" class="form-label">HR Email</label>
-    <input type="text" class="form-control" id="hrEmail">
+    <input type="text" class="form-control" name="hrEmail" formControlName="hrEmail">
   </div>
   <div class="col-12">
     <label for="description" class="form-label">Description</label>
-  <textarea id="description" class="form-control" rows="5"></textarea>
+  <textarea name="description" class="form-control" rows="5" formControlName="description"></textarea>
   </div>
 
   <div class="col-12 d-flex justify-content-center">
-    <button type="reset" class="btn btn-outline-secondary mx-3">Reset</button>
+    <button type="reset" class="btn btn-danger mx-3">Reset</button>
     <button type="submit" class="btn btn-warning">Post Job</button>
   </div>
 </form>

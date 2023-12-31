@@ -1,6 +1,5 @@
 package com.jobportal.server.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,39 +7,47 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="company")
-public class Company {
-
+@Table(name="job")
+public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String companyName;
-    @Column(nullable = false)
-    private String type;
-    @Column(nullable = false , unique = true)
-    private String foundedOn;
-    @Column(nullable = false)
-    private String companySize;
-    @Column(nullable = false)
-    private String website;
-    @Column(nullable = false)
-    private String headquarter;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
-    private String address;
+    private String title;
 
     @Column(nullable = false)
-    private String about;
+    private String experience;
+
+    @Column(nullable = false)
+    private String location;
+    @Column(nullable = false)
+    private String department;
+
+    @Column(nullable = false)
+    private String salaryRange;
+    @Column(nullable = false)
+    private String employmentType;
+
+    @Column(nullable = false)
+    private String Education;
+    @Column(nullable = false)
+    private String skills;
+
+    @Column(nullable = false)
+    private String hrName;
+
+    @Column(nullable = false)
+    private String hrEmail;
+
+    @Column(nullable = false)
+    private String description;
     @JsonIgnore
-@OneToMany(fetch = FetchType.LAZY, mappedBy = "company",cascade = CascadeType.ALL)
-    private List<Job> jobs;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id")
+    private Company company;
 }
