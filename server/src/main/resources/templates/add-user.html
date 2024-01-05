@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header :: head"></div>
+<body>
+<div th:replace="menu :: menu"></div>
+<h1 class="display-6 pb-4 mb-5 text-center fw-bold">New user registration</h1>
+<div class="d-flex justify-content-center">
+    <form class="w-50 row g-3 border p-5 box-shadow br-10" th:action="@{add}" th:object="${formModel}" method="post">
+        <div class="col-md-6">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+        </div>
+        <div class="col-md-6">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+        </div>
+        <div class="col-md-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}">
+        </div>
+        <div class="col-md-6">
+            <label for="dob" class="form-label">Date of birth</label>
+            <input type="text" class="form-control" id="dob" th:field="*{dob}">
+        </div>
+        <div class="col-md-6">
+            <label for="gender" class="form-label">Gender</label>
+            <select id="gender" class="form-select" th:field="*{gender}">
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="mobile" class="form-label">Mobile</label>
+            <input type="text" class="form-control" id="mobile" th:field="*{mobile}">
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+        </div>
+        <div class="col-12">
+            <label for="address" class="form-label">Address</label>
+            <textarea id="address" class="form-control" th:field="*{address}"></textarea>
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">About </label>
+            <textarea id="about" class="form-control" th:field="*{about}"></textarea>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <button type="reset" class="btn btn-danger mx-3">Reset</button>
+            <button type="submit" class="btn btn-warning" >Register</button>
+        </div>
+    </form>
+
+
+
+</div>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

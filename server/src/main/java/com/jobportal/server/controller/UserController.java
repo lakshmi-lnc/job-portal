@@ -3,20 +3,49 @@ package com.jobportal.server.controller;
 import com.jobportal.server.entity.User;
 import com.jobportal.server.service.JobService;
 import com.jobportal.server.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @AllArgsConstructor
 @RequestMapping("api/users")
 public class UserController {
 
     private UserService userService;
     private JobService jobService;
+
+    @GetMapping("add-user")
+    public String showUserForm(@ModelAttribute("formModel") User formModel) {
+        return "add-user";
+    }
+    @GetMapping("test")
+    public String test(User user) {
+        return "test";
+    }
+
+    @GetMapping("list")
+    public String listUsers(Model model) {
+        model.addAttribute("users", this.userService.getAllUsers());
+        return "list-user";
+    }
+
+    @PostMapping("add")
+    public String addUser(@Valid User user, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            return "add-user";
+        }
+        this.userService.createUser(user);
+        return "redirect:list";
+    }
 
     // build create User REST API
     @PostMapping

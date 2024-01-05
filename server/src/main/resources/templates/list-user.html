@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header :: head"></div>
+<body>
+<div th:replace="menu :: menu"></div>
+
+<h1 class="display-6 pb-4 text-center fw-bold">Registered Users</h1>
+<div class="d-flex justify-content-center">
+    <div class="w-75 row row-cols-1 row-cols-md-3 g-4" >
+        <div class="col"  th:each="c : ${users}">
+            <div class="card h-100 box-shadow border">
+                <!-- <img [src]="c.logo" class="card-img-top p-5" alt="..."> -->
+                <div class="card-body">
+                    <div class="d-flex">
+                        <img th:src="@{/images/user.png}" class="" height="60" alt="User">
+
+                        <div class="d-flex flex-column justify-content-center">
+                            <h5 class="card-title m-0" th:text="${c.firstName}"></h5>
+                            <small class="text-body-secondary" th:text="${c.lastName}"></small>
+                            <!-- <span class="badge text-bg-info">{{c.type}}</span> -->
+                        </div>
+                    </div>
+                    <a [href]="c.email" class="pb-2" th:text="${c.email}"></a>
+                    <p class="card-text" th:text="${c.dob}"></p>
+
+                    <p class="card-text box-highlight" th:text="${c.about}"></p>
+
+                    <p th:text="${c.address}"></p>
+                </div>
+                <div class="card-footer">
+                    <p th:text="${c.mobile}"></p>
+                    <!-- <button type="button" class="btn btn-danger">View Jobs</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>
