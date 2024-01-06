@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header :: head"></div>
+<body>
+<div th:replace="menu :: menu"></div>
+
+<h1 class="display-6 pb-4 text-center">New Job Post</h1>
+<div class="d-flex justify-content-center">
+    <form class="w-50 row g-3 border p-5 box-shadow br-10"  th:action="@{post-job}" th:object="${formModel}" method="post">
+        <div class="col-md-8">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}">
+        </div>
+        <div class="col-md-4">
+            <label for="experience" class="form-label">Experience</label>
+            <input type="number" class="form-control" id="experience" th:field="*{experience}">
+        </div>
+        <div class="col-md-6">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" th:field="*{location}">
+        </div>
+        <div class="col-md-6">
+            <label for="department" class="form-label">Department</label>
+            <input type="text" class="form-control" id="department" th:field="*{department}">
+        </div>
+        <div class="col-md-6">
+            <label for="salary" class="form-label">Salary range</label>
+            <input type="text" class="form-control" id="salary" th:field="*{salaryRange}">
+        </div>
+        <div class="col-md-6">
+            <label for="employeeType" class="form-label">Employment type</label>
+            <select id="employeeType" class="form-select" th:field="*{employmentType}">
+                <option value="Permananet">Permananet</option>
+                <option value="Contract">Contract</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="skill" class="form-label">Skills</label>
+            <input type="text" class="form-control" id="skill" th:field="*{skills}">
+        </div>
+        <div class="col-md-6">
+            <label for="education" class="form-label">Education</label>
+            <input type="text" class="form-control" id="education" th:field="*{education}">
+        </div>
+        <div class="col-md-6">
+            <label for="hrName" class="form-label">HR Name</label>
+            <input type="text" class="form-control" id="hrName" th:field="*{hrName}">
+        </div>
+        <div class="col-md-12">
+            <label for="hrEmail" class="form-label">HR Email</label>
+            <input type="text" class="form-control" id="hrEmail" th:field="*{hrEmail}">
+        </div>
+        <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" rows="5" th:field="*{description}"></textarea>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+            <button type="reset" class="btn btn-danger mx-3">Reset</button>
+            <button type="submit" class="btn btn-warning">Post Job</button>
+        </div>
+    </form>
+
+
+
+</div>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

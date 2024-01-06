@@ -9,6 +9,8 @@ public interface UserService {
 
     User getUserById(Long userId);
 
+    User authenticate(String email, String password);
+
     List<User> getAllUsers();
 
     User updateUser(User user);

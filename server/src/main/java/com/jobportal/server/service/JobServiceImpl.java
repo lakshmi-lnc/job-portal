@@ -2,6 +2,7 @@ package com.jobportal.server.service;
 
 import com.jobportal.server.entity.Company;
 import com.jobportal.server.entity.Job;
+import com.jobportal.server.entity.User;
 import com.jobportal.server.repository.JobRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class JobServiceImpl implements JobService {
         Optional<Job> j = jobRepository.findById(id);
         return j.get();
     }
+
+
 
     public List<Job> getAllJobs() {
         return jobRepository.findAll();

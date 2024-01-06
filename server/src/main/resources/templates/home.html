@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header :: head"></div>
+<body>
+<div th:replace="menu :: nav"></div>
+<main>
+    <div class="container py-4">
+             <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Welcome to Online Job Portal !!!</h1>
+                <p class="col fs-4">This is a web-based platform designed to connect job seekers with employers and vice versa.
+                    It serves as a digital marketplace for employment opportunities, allowing individuals and organizations to post, search, and apply for jobs.
+                    Also, it provides a convenient and efficient way for both employers and job seekers to navigate the hiring process.</p>
+                <a class="btn btn-primary btn-lg" aria-current="page" th:href="@{/api/companies/list-job}">Explore Jobs</a>
+
+            </div>
+        </div>
+
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Company</h2>
+                    <p>It empowers companies by offering a convenient and efficient way to connect with potential candidates, saving time and resources in the recruitment process. They also contribute to employer branding and provide valuable insights to optimize hiring strategies.</p>
+                     <a class="btn btn-outline-light" aria-current="page" th:href="@{/api/companies/add-company}">Register a Company</a>
+                    <a class="btn btn-light mx-4" aria-current="page" th:href="@{/api/companies/company-login}">Login</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Candidates</h2>
+                    <p>It empowers candidates by providing a user-friendly and efficient platform for job searching, application management, and networking. They offer transparency, convenience, and access to a wide array of opportunities, enabling candidates to make informed decisions about their careers.</p>
+
+                    <a class="btn btn-outline-secondary" aria-current="page" th:href="@{/api/users/add-user}">Register a candidate</a>
+                    <a class="btn btn-secondary mx-4" aria-current="page" th:href="@{/api/users/candidate-login}">Loin</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Online Job Portal</title>
 </head>
 <body>
     <nav th:fragment="menu" class="navbar navbar-expand-lg header-bar">
@@ -14,28 +14,15 @@
             <div class="collapse navbar-collapse d-flex align-items-center justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="company" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Companies
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="company">
-                            <li><a class="dropdown-item" routerLink="company/new-company">Add Company</a></li>
-                            <li><a class="dropdown-item" routerLink="company/list">Registered Companies</a></li>
-                            <li><a class="dropdown-item" routerLink="company/new-job">Add Job Posting</a></li>
-                            <li><a class="dropdown-item" routerLink="company/job-post-list">Jobs</a></li>
-                        </ul>
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/api/users/list}">Candidates</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/api/companies/list-job}">Jobs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/login}">Login</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/api/companies/list}">Companies</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/api/users/add-user}">Register</a>
-                    </li>
+
                 </ul>
             </div>
         </div>

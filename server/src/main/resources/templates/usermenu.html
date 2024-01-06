@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Job Portal</title>
+</head>
+<body>
+<nav th:fragment="usermenu" class="navbar navbar-expand-lg header-bar">
+    <div class="container-fluid">
+        <a class="navbar-brand font-white" href="#">Online Job Portal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex align-items-center justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/api/users/candidate-home}">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/api/companies/list}">Registered Companies</a>
+                </li>
+
+                <li class="nav-item"> <a class="nav-link active" aria-current="page" th:href="@{/api/companies/list-job}">Jobs</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

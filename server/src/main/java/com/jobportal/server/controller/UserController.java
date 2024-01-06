@@ -1,10 +1,15 @@
 package com.jobportal.server.controller;
 
+import com.jobportal.server.DataSetInMemory;
+import com.jobportal.server.dto.LoginDto;
 import com.jobportal.server.entity.User;
 import com.jobportal.server.service.JobService;
 import com.jobportal.server.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +27,42 @@ public class UserController {
 
     private UserService userService;
     private JobService jobService;
+
+
+    @GetMapping("candidate-login")
+    public String userLogin(@ModelAttribute("formModel") User formModel) {
+        return "user-login";
+    }
+
+    @PostMapping("authenticate-user")
+    public String authUser(@Valid LoginDto user, BindingResult result, Model model, HttpServletResponse response) {
+        if(result.hasErrors()) {
+            return "candidate-login";
+        }
+        User loggedInUser = userService.authenticate(user.email, user.password);
+        if(loggedInUser != null){
+            //dataSetInMemory
+            // create a cookie
+            Cookie cookie = new Cookie("username", user.email);
+            cookie.setAttribute("firstName", loggedInUser.getFirstName());
+            cookie.setAttribute("lastName", loggedInUser.getLastName());
+            cookie.setSecure(false);
+            cookie.setHttpOnly(true);
+            // add a cookie to the response
+            response.addCookie(cookie);
+
+            System.out.println(user.email);
+            // this.userService.createUser(user);
+            return "redirect:candidate-home";
+        }
+        return "candidate-login";
+    }
+
+    @GetMapping("candidate-home")
+    public String userLoginHome(@ModelAttribute("formModel") User formModel) {
+        return "user-home";
+    }
+
 
     @GetMapping("add-user")
     public String showUserForm(@ModelAttribute("formModel") User formModel) {

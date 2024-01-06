@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header :: head"></div>
+<body>
+<div th:replace="menu :: menu"></div>
+
+<h1 class="display-6 pb-4 text-center fw-bold">Add a new company</h1>
+<div class="d-flex justify-content-center">
+    <form class="w-50 row g-3 border p-5 box-shadow br-10" th:action="@{add}" th:object="${formModel}" method="post">
+        <div class="col-md-12">
+            <label for="companyName" class="form-label">Company Name</label>
+            <input type="text" class="form-control" id="companyName" th:field="*{companyName}">
+        </div>
+
+        <div class="col-md-6">
+            <label for="type" class="form-label">Type</label>
+            <select id="type" class="form-select" th:field="*{type}">
+                <option value="Private">Private</option>
+                <option value="Public">Public</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="founded" class="form-label">Founded on</label>
+            <input type="text" class="form-control" id="founded" th:field="*{foundedOn}">
+        </div>
+        <div class="col-md-6">
+            <label for="companySize" class="form-label">Company Size</label>
+            <input type="text" class="form-control" id="companySize" th:field="*{companySize}">
+        </div>
+        <div class="col-md-6">
+            <label for="website" class="form-label">Website</label>
+            <input type="text" class="form-control" id="website" th:field="*{website}">
+        </div>
+        <div class="col-md-6">
+            <label for="Headquarter" class="form-label">Headquarter</label>
+            <input type="text" class="form-control" id="headquarter" th:field="*{headquarter}">
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+        </div>
+        <div class="col-12">
+            <label for="address" class="form-label">Registered Address</label>
+            <textarea id="address" class="form-control"  th:field="*{address}"></textarea>
+        </div>
+        <div class="col-12">
+            <label for="about" class="form-label">About</label>
+            <textarea name="about" class="form-control" th:field="*{about}"></textarea>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+            <button type="reset" class="btn btn-danger mx-3 fw-bold">Reset</button>
+            <button type="submit" class="btn btn-warning fw-bold" >Add Company</button>
+        </div>
+    </form>
+
+</div>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

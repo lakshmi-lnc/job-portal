@@ -19,6 +19,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    public User authenticate(String email, String password){
+        Optional<User> optionalUser = userRepository.authenticate(email, password);
+        return optionalUser.get();
+    }
     @Override
     public User getUserById(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);

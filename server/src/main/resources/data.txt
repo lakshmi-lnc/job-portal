@@ -1,0 +1,3 @@
+insert into users (FIRSTNAME,LASTNAME,EMAIL,DOB,GENDER,MOBILE,PASSWORD,ADDRESS,ABOUT) values
+("Murugan", "Siva","murugan@hcl.com","30-05-2000","Male","9874563210","India@123","12,anna salai, chennai -600002",
+"I'm a final year student and looking for intern positions in bangalore or chennai");

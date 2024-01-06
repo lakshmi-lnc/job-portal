@@ -2,17 +2,21 @@ package com.jobportal.server.controller;
 
 import com.jobportal.server.entity.Company;
 import com.jobportal.server.entity.Job;
+import com.jobportal.server.entity.User;
 import com.jobportal.server.service.CompanyService;
 import com.jobportal.server.service.JobService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.stereotype.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @AllArgsConstructor
 @RequestMapping("api/companies")
 public class CompanyController {
@@ -20,6 +24,50 @@ public class CompanyController {
     private CompanyService companyService;
     private JobService jobService;
     // build create Company REST API
+
+    @GetMapping("company-login")
+    public String companyLogin(@ModelAttribute("formModel") Company formModel) {
+        return "company-login";
+    }
+
+    @GetMapping("add-job")
+    public String showJobForm(@ModelAttribute("formModel") Job formModel) {
+        return "add-job";
+    }
+     @GetMapping("list-job")
+    public String listJobs(Model model) {
+        model.addAttribute("jobs", this.jobService.getAllJobs());
+        return "list-job";
+    }
+
+    @PostMapping("post-job")
+    public String addJob(@Valid Job job, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            return "add-job";
+        }
+        this.jobService.createJob(job);
+        return "redirect:list-job";
+    }
+
+    @GetMapping("add-company")
+    public String showCompanyForm(@ModelAttribute("formModel") Company formModel) {
+        return "add-company";
+    }
+    @GetMapping("list")
+    public String listCompanies(Model model) {
+        model.addAttribute("companies", this.companyService.getAllCompanies());
+        return "list-company";
+    }
+
+    @PostMapping("add")
+    public String addCompany(@Valid Company company, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            return "add-company";
+        }
+        this.companyService.createCompany(company);
+        return "redirect:list";
+    }
+
     @PostMapping
     public ResponseEntity<Company> createCompany(@RequestBody Company company){
         Company savedCompany = companyService.createCompany(company);
