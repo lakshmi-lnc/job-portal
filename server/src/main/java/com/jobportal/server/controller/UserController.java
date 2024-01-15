@@ -6,7 +6,9 @@ import com.jobportal.server.entity.User;
 import com.jobportal.server.service.JobService;
 import com.jobportal.server.service.UserService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,22 +36,34 @@ public class UserController {
         return "user-login";
     }
 
+    @GetMapping("candidate-logout")
+    public String userLogout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+
     @PostMapping("authenticate-user")
-    public String authUser(@Valid LoginDto user, BindingResult result, Model model, HttpServletResponse response) {
+    public String authUser(@Valid LoginDto user, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) {
         if(result.hasErrors()) {
             return "candidate-login";
         }
         User loggedInUser = userService.authenticate(user.email, user.password);
         if(loggedInUser != null){
             //dataSetInMemory
+            HttpSession session = request.getSession();
+            session.setAttribute("email", user.email);
+            session.setAttribute("firstName", loggedInUser.getFirstName());
+            session.setAttribute("lastName", loggedInUser.getLastName());
+            session.setAttribute("userType", "CANDIDATE");
             // create a cookie
-            Cookie cookie = new Cookie("username", user.email);
+         /*   Cookie cookie = new Cookie("username", user.email);
             cookie.setAttribute("firstName", loggedInUser.getFirstName());
             cookie.setAttribute("lastName", loggedInUser.getLastName());
             cookie.setSecure(false);
             cookie.setHttpOnly(true);
             // add a cookie to the response
-            response.addCookie(cookie);
+            response.addCookie(cookie);*/
 
             System.out.println(user.email);
             // this.userService.createUser(user);
@@ -59,7 +73,12 @@ public class UserController {
     }
 
     @GetMapping("candidate-home")
-    public String userLoginHome(@ModelAttribute("formModel") User formModel) {
+    public String userLoginHome(@ModelAttribute("formModel") User formModel,Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String fName = (String) session.getAttribute("firstName");
+        String lName = (String) session.getAttribute("lastName");
+        model.addAttribute("firstName", fName);
+        model.addAttribute("lastName", lName);
         return "user-home";
     }
 

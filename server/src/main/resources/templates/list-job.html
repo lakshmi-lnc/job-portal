@@ -2,7 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="header :: head"></div>
 <body>
-<div th:replace="menu :: menu"></div>
+<div th:if="${userType == 'CANDIDATE'}">
+    <div th:replace="usermenu :: nav"></div>
+</div>
+<div th:if="${userType != 'CANDIDATE' && userType != 'COMPANY'}">
+    <div th:replace="menu :: menu"></div>
+</div>
+
+<div th:if="${userType == 'COMPANY'}">
+    <div th:replace="companymenu :: nav"></div>
+</div>
 
 <h1 class="display-6 pb-4 text-center">Jobs</h1>
 <div class="d-flex justify-content-center">

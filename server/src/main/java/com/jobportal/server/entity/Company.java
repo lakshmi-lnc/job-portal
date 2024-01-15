@@ -34,11 +34,13 @@ public class Company {
     @Column(nullable = false)
     private String headquarter;
     @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
     private String password;
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String about;
     @JsonIgnore
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "company",cascade = CascadeType.ALL)

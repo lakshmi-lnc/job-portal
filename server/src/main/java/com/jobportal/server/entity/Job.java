@@ -44,7 +44,7 @@ public class Job {
     @Column(nullable = false)
     private String hrEmail;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=10000)
     private String description;
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)

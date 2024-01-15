@@ -1,6 +1,7 @@
 package com.jobportal.server.service;
 
 import com.jobportal.server.entity.Company;
+import com.jobportal.server.entity.User;
 import com.jobportal.server.repository.CompanyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,10 @@ public class CompanyServiceImpl implements CompanyService{
         return companyRepository.save(company);
     }
 
-    
+    public Company authenticate(String email, String password){
+        Optional<Company> optionalUser = companyRepository.authenticate(email, password);
+        return optionalUser.get();
+    }
     public Company getCompanyById(Long companyId) {
         Optional<Company> optionalCompany = companyRepository.findById(companyId);
         return optionalCompany.get();

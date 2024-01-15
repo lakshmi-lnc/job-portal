@@ -1,10 +1,14 @@
 package com.jobportal.server.controller;
 
+import com.jobportal.server.dto.LoginDto;
 import com.jobportal.server.entity.Company;
 import com.jobportal.server.entity.Job;
 import com.jobportal.server.entity.User;
 import com.jobportal.server.service.CompanyService;
 import com.jobportal.server.service.JobService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,16 +30,55 @@ public class CompanyController {
     // build create Company REST API
 
     @GetMapping("company-login")
-    public String companyLogin(@ModelAttribute("formModel") Company formModel) {
+    public String companyLogin(@ModelAttribute("formModel") LoginDto formModel) {
         return "company-login";
     }
 
+    @GetMapping("company-logout")
+    public String companyLogOut(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+
+    @PostMapping("authenticate-company")
+    public String authUser(@Valid LoginDto user, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) {
+        if(result.hasErrors()) {
+            return "company-login";
+        }
+        Company loggedInUser = companyService.authenticate(user.email, user.password);
+        System.out.println(user.email + " " + user.password);
+        if(loggedInUser != null){
+            //dataSetInMemory
+            HttpSession session = request.getSession();
+            session.setAttribute("username", user.email);
+            session.setAttribute("name", loggedInUser.getCompanyName());
+            session.setAttribute("userType", "COMPANY");
+            System.out.println(user.email);
+            // this.userService.createUser(user);
+            return "redirect:company-home";
+        }
+        return "company-login";
+    }
+    @GetMapping("company-home")
+    public String companyLoginHome(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String uName = (String) session.getAttribute("userName");
+        String name = (String) session.getAttribute("name");
+        model.addAttribute("userName", uName);
+        model.addAttribute("name", name);
+        return "company-home";
+    }
     @GetMapping("add-job")
     public String showJobForm(@ModelAttribute("formModel") Job formModel) {
         return "add-job";
     }
      @GetMapping("list-job")
-    public String listJobs(Model model) {
+    public String listJobs(Model model, HttpServletRequest request) {
+         HttpSession session = request.getSession();
+         String userType = (String) session.getAttribute("userType");
+         model.addAttribute("userType", userType);
+         System.out.println("User type is " + userType);
         model.addAttribute("jobs", this.jobService.getAllJobs());
         return "list-job";
     }
@@ -54,7 +97,11 @@ public class CompanyController {
         return "add-company";
     }
     @GetMapping("list")
-    public String listCompanies(Model model) {
+    public String listCompanies(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String userType = (String) session.getAttribute("userType");
+        model.addAttribute("userType", userType);
+        System.out.println("User type is " + userType);
         model.addAttribute("companies", this.companyService.getAllCompanies());
         return "list-company";
     }

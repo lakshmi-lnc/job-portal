@@ -3,8 +3,7 @@
 <div th:replace="header :: head"></div>
 <body>
 <div th:replace="usermenu :: nav"></div>
-<h1 class="display-6 pb-4 mb-5 text-center fw-bold">Welcome to home!</h1>
-
+<h1 class="display-6 pb-4 mb-5 text-center fw-bold" th:inline="text">Hello, [[${firstName + ' ' + lastName}]]! Welcome to our website.</h1>
 <div th:replace="footer :: footer"></div>
 </body>
 </html>
