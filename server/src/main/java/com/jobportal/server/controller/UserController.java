@@ -52,6 +52,7 @@ public class UserController {
         if(loggedInUser != null){
             //dataSetInMemory
             HttpSession session = request.getSession();
+            session.setAttribute("userId", loggedInUser.getId());
             session.setAttribute("email", user.email);
             session.setAttribute("firstName", loggedInUser.getFirstName());
             session.setAttribute("lastName", loggedInUser.getLastName());

@@ -42,7 +42,5 @@ public class Company {
 
     @Column(nullable = false, length = 5000)
     private String about;
-    @JsonIgnore
-@OneToMany(fetch = FetchType.LAZY, mappedBy = "company",cascade = CascadeType.ALL)
-    private List<Job> jobs;
+
 }

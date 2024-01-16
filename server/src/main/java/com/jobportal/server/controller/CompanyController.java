@@ -1,5 +1,6 @@
 package com.jobportal.server.controller;
 
+import com.jobportal.server.dto.JobActionDto;
 import com.jobportal.server.dto.LoginDto;
 import com.jobportal.server.entity.Company;
 import com.jobportal.server.entity.Job;
@@ -60,6 +61,26 @@ public class CompanyController {
         }
         return "company-login";
     }
+
+    @PostMapping("apply-job")
+    public String applyJob(@RequestParam("jobId") Long jobId, @RequestParam("userId") Long userId) {
+
+        this.jobService.applyJob(userId, jobId);
+
+        return "redirect:applied-jobs";
+    }
+
+    @GetMapping("applied-jobs")
+    public String appliedJobs(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+       model.addAttribute("title", "Applied Jobs");
+        String userType = (String) session.getAttribute("userType");
+        model.addAttribute("userType", userType);
+        model.addAttribute("jobs", this.jobService.getAllAppliedJobsByUser(userId));
+        return "list-job";
+    }
+
     @GetMapping("company-home")
     public String companyLoginHome(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -78,7 +99,13 @@ public class CompanyController {
          HttpSession session = request.getSession();
          String userType = (String) session.getAttribute("userType");
          model.addAttribute("userType", userType);
+         Long userID = (Long) session.getAttribute("userId");
+         if(userID != null){
+             String userId = userID.toString();
+         model.addAttribute("userId", userID);
          System.out.println("User type is " + userType);
+         }
+         model.addAttribute("title", "Jobs");
         model.addAttribute("jobs", this.jobService.getAllJobs());
         return "list-job";
     }
@@ -158,7 +185,7 @@ public class CompanyController {
     public ResponseEntity<Job> postAJob(@PathVariable("id") Long companyId, @RequestBody Job job){
         Company company = companyService.getCompanyById(companyId);
         //List<Job> jobs = new ArrayList<Job>();
-        job.setCompany(company);
+        job.setCompanyId(companyId);
         //jobs.add(job);
         Job j = jobService.createJob(job);
       //  Company savedCompany = companyService.createCompany(company);

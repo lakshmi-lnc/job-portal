@@ -46,8 +46,6 @@ public class Job {
 
     @Column(nullable = false, length=10000)
     private String description;
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "company_id")
-    private Company company;
+
+    private Long companyId;
 }

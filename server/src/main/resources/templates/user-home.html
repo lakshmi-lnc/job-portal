@@ -3,7 +3,19 @@
 <div th:replace="header :: head"></div>
 <body>
 <div th:replace="usermenu :: nav"></div>
-<h1 class="display-6 pb-4 mb-5 text-center fw-bold" th:inline="text">Hello, [[${firstName + ' ' + lastName}]]! Welcome to our website.</h1>
+
+<div class="p-5 mb-4 bg-light rounded-3 border container mt-5">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Hello, [[${firstName + ' ' + lastName}]]!</h1>
+        <p class="col-md-8 fs-4">Check out the latest jobs posted by the companies below. Also, you can follow up your applied jobs as well</p>
+
+       <a class="btn btn-warning btn-lg" aria-current="page" th:href="@{/api/companies/list-job}">View Latest jobs</a>
+        <a class="btn btn-danger btn-lg mx-5" aria-current="page" th:href="@{/api/companies/applied-jobs}">View Applied jobs</a>
+
+
+    </div>
+</div>
+
 <div th:replace="footer :: footer"></div>
 </body>
 </html>
