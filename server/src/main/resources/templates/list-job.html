@@ -21,20 +21,46 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-title" th:text="${j.title}"> </h5>
-                            <img   th:src="@{/images/company/adobe.svg}" width="100" class="img-fluid rounded-start"
-                                 alt="...">
-                        </div>
-                        <p class="card-text" th:text="${j.description}"></p>
-                        <div class="d-flex justify-content-between"> <p>Salary: <span th:text="${j.salaryRange}"></span></p><p th:text="${j.location}"></p></div>
-                        <div class="d-flex justify-content-center" th:if="${ hideActions != true &&  userType == 'CANDIDATE'}">
-                            <a class="btn btn-warning apply-job-button" th:href="@{/api/companies/list/applied-jobs}" th:data-job-id="${j.id}" th:data-user-id="${userId}">Apply this Job</a>
+                            <h5 class="card-header mb-4 w-100 text-danger" th:text="${j.title}"> </h5>
+                            <!--<img   th:src="@{/images/company/adobe.svg}" width="100" class="img-fluid rounded-start"
+                                 alt="...">-->
                         </div>
 
-                        <div th:if="${hideActions != true && userType == 'COMPANY'}" class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-warning" th:data-job-id="${j.id}">View Applicants</a>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p><span class="text-muted">Skills : </span><span class="fw-bold" th:text="${j.skills}"></span></p>
+
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p > <span class="text-muted">Work experience :</span><span class="fw-bold" th:text="${j.experience}"></span> years</p>
                         </div>
 
+                        <p class="text-muted"> Job description : </p>
+                        <p class="card-text job" th:text="${j.description}"></p>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p><span class="text-muted">Salary: </span><span class="fw-bold" th:text="${j.salaryRange}"></span></p>
+                            <p > <span class="text-muted">Work location :</span><span class="fw-bold" th:text="${j.location}"></span></p>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p><span class="text-muted">Qualification: </span><span class="fw-bold" th:text="${j.education}"></span></p>
+                            <p > <span class="text-muted">Work experience :</span><span class="fw-bold" th:text="${j.experience}"></span></p>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p><span class="text-muted">HR Name: </span><span class="fw-bold" th:text="${j.hrName}"></span></p>
+                            <div class="d-flex justify-content-center" th:if="${ hideActions != true &&  userType == 'CANDIDATE'}">
+                                <a class="btn btn-warning apply-job-button" th:href="@{/api/companies/list/applied-jobs}" th:data-job-id="${j.id}" th:data-user-id="${userId}">Apply this Job</a>
+                            </div>
+
+                            <div th:if="${hideActions != true && userType == 'COMPANY'}" class="d-flex justify-content-center">
+                                <a href="#" class="btn btn-warning" th:data-job-id="${j.id}">View Applicants</a>
+                            </div>
+
+                            <p > <span class="text-muted">HR Email:</span><span class="fw-bold" th:text="${j.hrEmail}"></span></p>
+                        </div>
                     </div>
                 </div>
             </div>

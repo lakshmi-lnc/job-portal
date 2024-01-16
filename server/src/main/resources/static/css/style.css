@@ -142,3 +142,19 @@ color:white;
           font-size: 3.5rem;
         }
       }
+ .job{
+ padding: 20px;
+     border-radius: 10px;
+     margin: 20px;
+     background-color: #F5F5F5;
+     line-height: 2;
+     text-align: justify;
+
+     }
+
+      .truncate-text {
+           overflow: hidden;
+           text-overflow: ellipsis;
+           white-space: nowrap;
+           max-width: 100%;
+         }

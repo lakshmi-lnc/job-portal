@@ -20,14 +20,14 @@
                 <div class="card-body">
 
                     <h5 class="card-title" th:text="${c.companyName}"></h5>
-                    <div class="d-flex justify-content-between pb-2">
-                        <small class="text-body-secondary" th:text="${c.foundedOn}"> Found on</small>
+                    <div class="d-flex justify-content-between mb-2">
+                        <p class="m-0"><span class="text-muted">Found on : </span><small class="text-body-secondary" th:text="${c.foundedOn}"> </small> </p>
                         <span class="badge text-bg-info" th:text="${c.type}"></span>
                     </div>
                     <a th:href="${c.website}" class="pb-2" ></a>
-                    <p class="card-text" th:text="${c.companySize}">Employees</p>
+                    <p class="d-flex justify-content-between pb-2"><span class="text-muted">Employees</span> <span class="card-text" th:text="${c.companySize}"></span></p>
 
-                    <p class="card-text box-highlight" *ngIf="c.about" th:text="${c.about}"></p>
+                    <p class="card-text job" *ngIf="c.about" th:text="${c.about}"></p>
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-danger">View Jobs</button>
