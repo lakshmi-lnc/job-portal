@@ -67,7 +67,11 @@ public class CompanyController {
 
         this.jobService.applyJob(userId, jobId);
 
-        return "redirect:applied-jobs";
+        return "user-job-applied";
+    }
+    @GetMapping("user-job-applied")
+    public String jobsApplied() {
+        return "user-job-applied";
     }
 
     @GetMapping("applied-jobs")
@@ -77,6 +81,7 @@ public class CompanyController {
        model.addAttribute("title", "Applied Jobs");
         String userType = (String) session.getAttribute("userType");
         model.addAttribute("userType", userType);
+        model.addAttribute("hideActions", true);
         model.addAttribute("jobs", this.jobService.getAllAppliedJobsByUser(userId));
         return "list-job";
     }

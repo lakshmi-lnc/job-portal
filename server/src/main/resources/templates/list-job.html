@@ -27,13 +27,11 @@
                         </div>
                         <p class="card-text" th:text="${j.description}"></p>
                         <div class="d-flex justify-content-between"> <p>Salary: <span th:text="${j.salaryRange}"></span></p><p th:text="${j.location}"></p></div>
-                        <div class="d-flex justify-content-center" th:if="${userType == 'CANDIDATE'}">
+                        <div class="d-flex justify-content-center" th:if="${ hideActions != true &&  userType == 'CANDIDATE'}">
                             <a class="btn btn-warning apply-job-button" th:href="@{/api/companies/list/applied-jobs}" th:data-job-id="${j.id}" th:data-user-id="${userId}">Apply this Job</a>
-
-                            <a href="#" class="btn btn-success mx-3" th:data-job-id="${j.id}" th:data-user-id="${userId}"  >Add to watchlist</a>
                         </div>
 
-                        <div th:if="${userType == 'COMPANY'}" class="d-flex justify-content-center">
+                        <div th:if="${hideActions != true && userType == 'COMPANY'}" class="d-flex justify-content-center">
                             <a href="#" class="btn btn-warning" th:data-job-id="${j.id}">View Applicants</a>
                         </div>
 
@@ -57,11 +55,14 @@
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.text();
+           // return response.text();
         })
         .then(data => {
             // Handle success response, if needed
+
             alert('Job applied successfully');
+            window.location.href = '/api/companies/user-job-applied';
+            return ;
         })
         .catch(error => {
             // Handle error, if needed

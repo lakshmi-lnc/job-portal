@@ -10,7 +10,6 @@ public interface JobService {
 
     JobApplicants applyJob(Long userID, Long jobID);
 
-    WatchList addJobToWatchlist(Long userID, Long jobID);
 
     List<Job> getAllJobsByCompany(Long companyId);
     List<Job> getAllAppliedJobsByUser(Long userId);

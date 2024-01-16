@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header :: head"></div>
+<body>
+<div th:replace="usermenu :: nav"></div>
+
+<div class="p-5 mb-4 bg-danger rounded-3 border container mt-5" style="color:white;">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">404 - Not Found !</h1>
+        <p class="col-md-8 fs-4">The requested page could not be found.</p>
+        <a class="btn btn-lg mx-5" aria-current="page" th:href="@{/api/users/candidate-home}">Goto Home</a>
+
+
+    </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

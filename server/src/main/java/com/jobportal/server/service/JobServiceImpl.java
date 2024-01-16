@@ -3,7 +3,6 @@ package com.jobportal.server.service;
 import com.jobportal.server.entity.*;
 import com.jobportal.server.repository.JobApplicantsRepository;
 import com.jobportal.server.repository.JobRepository;
-import com.jobportal.server.repository.WatchListRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import java.util.Optional;
 public class JobServiceImpl implements JobService {
 
     private JobRepository jobRepository;
-    private WatchListRepository watchListRepository;
+
     private JobApplicantsRepository jobApplicantsRepository;
 
     public Job createJob(Job j) {
@@ -47,12 +46,7 @@ public class JobServiceImpl implements JobService {
        return jobApplicantsRepository.save(jobApplicants);
     }
 
-    public WatchList addJobToWatchlist(Long userID, Long jobID){
-        WatchList watchList = new WatchList();
-        watchList.setJobId(jobID);
-        watchList.setUserId(userID);
-        return watchListRepository.save(watchList);
-    }
+
 
     public List<Job> getAllJobsByCompany(Long companyId){
         return null;
