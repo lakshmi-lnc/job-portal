@@ -143,13 +143,18 @@ color:white;
         }
       }
  .job{
- padding: 20px;
+    padding: 10px;
      border-radius: 10px;
      margin: 20px;
      background-color: #F5F5F5;
      line-height: 2;
      text-align: justify;
-
+    max-height: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
      }
 
       .truncate-text {

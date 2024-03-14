@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="header :: head"></div>
+<div th:replace="header :: head(name=${name})"></div>
 <body>
 <div th:replace="companymenu :: nav"></div>
-<h1 class="display-6 pb-4 mb-5 text-center fw-bold" th:inline="text">Hello, [[${name}]]! Welcome to our website.</h1>
+<div class="d-flex flex-column justify-content-center align-items-center" style="height: calc(100vh - 122px);">
+    <h1 class="display-6 pb-4 text-center fw-bold" th:inline="text">Hello, [[${name}]]!</h1>
+      <h2>Welcome to our job portal.</h2>
+</div>
+
 <div th:replace="footer :: footer"></div>
 </body>
 </html>
