@@ -26,8 +26,14 @@
     </div>
 </nav>
 
-<div>
-    [[${name}]]
+<div id="companyname">
 </div>
+<script>
+    // Read value from local storage
+    var localStorageValue = localStorage.getItem('company-name');
+
+    // Assign the value to the div
+    document.getElementById('companyname').innerText = localStorageValue;
+</script>
 </body>
 </html>

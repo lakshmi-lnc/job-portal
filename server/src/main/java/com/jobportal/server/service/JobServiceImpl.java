@@ -37,7 +37,8 @@ public class JobServiceImpl implements JobService {
     }
 
     public List<Job> getAllJobsByCompanyId(Long id) {
-        return jobRepository.findAll();
+System.out.println("company id in repo"+ id);
+        return jobRepository.getAllJobsByCompany(id);
     }
     public JobApplicants applyJob(Long userID, Long jobID){
         JobApplicants jobApplicants = new JobApplicants();

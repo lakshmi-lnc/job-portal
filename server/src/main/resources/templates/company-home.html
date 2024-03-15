@@ -9,5 +9,13 @@
 </div>
 
 <div th:replace="footer :: footer"></div>
+
+<script>
+    <![CDATA[*/
+            // Accessing Thymeleaf variable in JavaScript
+            var myThymeleafVariable = /*[[${name}]]*/;
+        /*]]>
+   localStorage.setItem('company-name', myThymeleafVariable);
+</script>
 </body>
 </html>

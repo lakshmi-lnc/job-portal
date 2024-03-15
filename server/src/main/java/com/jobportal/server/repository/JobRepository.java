@@ -16,4 +16,9 @@ public interface JobRepository extends JpaRepository<Job, Long> {
             nativeQuery = true,
             value = "select * from job j where j.id in (select job_id from `job-applicants` ja where user_id=:userId)")
     List<Job> getAllAppliedJobsByUser(@Param("userId") Long userId);
+
+    @Query(
+            nativeQuery = true,
+            value = "select * from job where company_id=:companyId")
+    List<Job> getAllJobsByCompany(@Param("companyId") Long companyId);
 }

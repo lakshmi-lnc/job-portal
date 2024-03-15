@@ -54,6 +54,7 @@ public class CompanyController {
             HttpSession session = request.getSession();
             session.setAttribute("username", user.email);
             session.setAttribute("name", loggedInUser.getCompanyName());
+            session.setAttribute("companyId", loggedInUser.getId());
             session.setAttribute("userType", "COMPANY");
             System.out.println(user.email);
             // this.userService.createUser(user);
@@ -187,10 +188,15 @@ public class CompanyController {
     }
 
     @PostMapping("{id}/job")
-    public ResponseEntity<Job> postAJob(@PathVariable("id") Long companyId, @RequestBody Job job){
-        Company company = companyService.getCompanyById(companyId);
+    public ResponseEntity<Job> postAJob(HttpServletRequest request,@PathVariable("id") Long companyId, @RequestBody Job job){
+
+        HttpSession session = request.getSession();
+        String userType = (String) session.getAttribute("userType");
+       Long company_id = (Long) session.getAttribute("companyId");
+
+       // Company company = companyService.getCompanyById(companyId);
         //List<Job> jobs = new ArrayList<Job>();
-        job.setCompanyId(companyId);
+        job.setCompanyId(company_id);
         //jobs.add(job);
         Job j = jobService.createJob(job);
       //  Company savedCompany = companyService.createCompany(company);
@@ -202,4 +208,24 @@ public class CompanyController {
         List<Job> jobs = jobService.getAllJobs();
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}/jobs")
+    public String listJobsByCompany(Model model, HttpServletRequest request, @PathVariable("id") Long companyId) {
+        HttpSession session = request.getSession();
+        String userType = (String) session.getAttribute("userType");
+        model.addAttribute("userType", userType);
+        Long userID = (Long) session.getAttribute("userId");
+        if(userID != null){
+            String userId = userID.toString();
+            model.addAttribute("userId", userID);
+            System.out.println("User type is " + userType);
+        }
+        model.addAttribute("title", "Jobs");
+        System.out.println("company id " + companyId);
+        List<Job> jobs = jobService.getAllJobsByCompanyId(companyId);
+
+        model.addAttribute("jobs", jobs);
+        return "list-job";
+    }
+
 }

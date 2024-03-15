@@ -30,7 +30,8 @@
                     <p class="card-text job" *ngIf="c.about" th:text="${c.about}"></p>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-danger">View Jobs</button>
+                    <a class="btn btn-danger" th:href="@{'/api/companies/' + ${c.id} + '/jobs'}">View Jobs</a>
+
                 </div>
             </div>
         </div>
