@@ -51,13 +51,14 @@
                     <div class="card-footer">
                         <div class="d-flex align-items-center justify-content-between">
                             <p><span class="text-muted">HR Name: </span><span class="fw-bold" th:text="${j.hrName}"></span></p>
-                            <div class="d-flex justify-content-center" th:if="${ hideActions != true &&  userType == 'CANDIDATE'}">
-                                <a class="btn btn-warning apply-job-button" th:href="@{/api/companies/list/applied-jobs}" th:data-job-id="${j.id}" th:data-user-id="${userId}">Apply this Job</a>
-                            </div>
-
-                            <div th:if="${hideActions != true && userType == 'COMPANY'}" class="d-flex justify-content-center">
+                            <!--<div class="d-flex justify-content-center" th:if="${ hideActions != true &&  userType == 'CANDIDATE'}">
+                               <a class="btn btn-warning apply-job-button" th:href="@{${j.companyId}+'/jobs/'+${j.id}+'/user/'+${userId}+'/apply'}" th:data-job-id="${j.id}" th:data-user-id="${userId}">
+                                   Apply this Job</a>
+                            </div>-->
+                           <!-- <span class="fw-bold" th:text="${'/jobs/'+${j.id} +'/user/'+${userId}'}"></span>-->
+                        <!--    <div th:if="${hideActions != true && userType == 'COMPANY'}" class="d-flex justify-content-center">
                                 <a href="#" class="btn btn-warning" th:data-job-id="${j.id}">View Applicants</a>
-                            </div>
+                            </div>-->
 
                             <p > <span class="text-muted">HR Email:</span><span class="fw-bold" th:text="${j.hrEmail}"></span></p>
                         </div>

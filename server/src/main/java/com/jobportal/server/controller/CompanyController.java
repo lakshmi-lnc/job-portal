@@ -63,7 +63,7 @@ public class CompanyController {
         return "company-login";
     }
 
-    @PostMapping("apply-job")
+    @GetMapping("{id}/jobs/{jobId}/user/{userId}/apply")
     public String applyJob(@RequestParam("jobId") Long jobId, @RequestParam("userId") Long userId) {
 
         this.jobService.applyJob(userId, jobId);
